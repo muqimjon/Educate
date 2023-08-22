@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Educate.Domain.Enums;
 
-namespace Educate.Domain.Enums
+public enum UserRole
 {
-    internal class UserRole
-    {
-    }
+    Admin=1,
+    Teacher = 2,
+    User = 3
 }
