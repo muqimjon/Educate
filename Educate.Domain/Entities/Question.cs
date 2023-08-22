@@ -2,13 +2,13 @@
 
 namespace Educate.Domain.Entities;
 
-public class Question:Auditable
+public class Question : Auditable
 {
-    public string Text { get; set; }
+    public string Text { get; set; } = string.Empty;
 
-    public long? AttachmentId { get; set; }
-    public Attachment Attachment { get; set; }
+    public long AttachmentId { get; set; }
+    public Attachment Attachment { get; set; } = default!;
 
     public long AssignmentId { get; set; }
-    public Assigment Assigment { get; set; }
+    public Assignment Assignment { get; set; } = default!;
 }

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Educate.Domain.Commons;
+﻿using Educate.Domain.Commons;
 
-namespace Educate.Domain.Entities
+namespace Educate.Domain.Entities;
+
+public class Attachment : Auditable
 {
-    public class Attachment:Auditable
-    {
-        public string Filepath { get; set; }
-        public string Filename { get; set; }
-
-    }
+    public string FilePath { get; set; } = string.Empty;
+    public string FileName { get; set; } = string.Empty;
 }
