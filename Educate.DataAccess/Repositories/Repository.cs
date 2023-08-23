@@ -8,24 +8,24 @@ namespace Educate.DataAccess.Repositories;
 
 public class Repository<T> : IRepository<T> where T : Auditable
 {
-    private readonly DbSet<T> dbSet;
-    private readonly AppDbContext appDbContext;
+    private readonly AppDbContext _appDbContext;
+    private readonly DbSet<T> _dbSet;
 
     public Repository(AppDbContext appDbContext)
     {
-        this.appDbContext = appDbContext;
-        dbSet = appDbContext.Set<T>();
+        _appDbContext = appDbContext;
+        _dbSet = appDbContext.Set<T>();
     }
 
     public async Task CreateAsync(T entity)
     {
-        await dbSet.AddAsync(entity);
+        await _dbSet.AddAsync(entity);
     }
 
     public void Update(T entity)
     {
         entity.UpdatedAt = DateTime.UtcNow;
-        dbSet.Entry(entity).State = EntityState.Modified;
+        _dbSet.Entry(entity).State = EntityState.Modified;
     }
 
     public void Delete(T entity)
@@ -35,12 +35,12 @@ public class Repository<T> : IRepository<T> where T : Auditable
 
     public void Destroy(T entity)
     {
-        dbSet.Remove(entity);
+        _dbSet.Remove(entity);
     }
 
     public async Task<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null!)
     {
-        var query = expression is null ? dbSet : dbSet.Where(expression);
+        var query = expression is null ? _dbSet : _dbSet.Where(expression);
 
         if (includes is not null)
             foreach (var include in includes)
@@ -52,7 +52,7 @@ public class Repository<T> : IRepository<T> where T : Auditable
 
     public IQueryable<T> GetAll(Expression<Func<T, bool>> expression = null!, bool asNoTracking = true, string[] includes = null!)
     {
-        var query = expression is null ? dbSet : dbSet.Where(expression);
+        var query = expression is null ? _dbSet : _dbSet.Where(expression);
         query = asNoTracking ? query.AsNoTracking() : query;
 
         if (includes is not null)
@@ -64,6 +64,6 @@ public class Repository<T> : IRepository<T> where T : Auditable
 
     public async Task SaveAsync()
     {
-        await appDbContext.SaveChangesAsync();
+        await _appDbContext.SaveChangesAsync();
     }
 }
