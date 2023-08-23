@@ -10,4 +10,17 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\Assignments\" />
+    <Folder Include="DTOs\Attachments\" />
+    <Folder Include="DTOs\Categories\" />
+    <Folder Include="DTOs\Results\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Educate.Domain\Educate.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
