@@ -1,12 +1,12 @@
 ﻿using Educate.Data.Contexts;
 using Educate.DataAccess.IReposirtories;
-using Microsoft.EntityFrameworkCore;
 
 namespace Educate.DataAccess.Repositories;
 
 public class UnitOfWork : IDisposable
 {
     private readonly AppDbContext _appDbContext;
+
     public UnitOfWork()
     {
         _appDbContext = new AppDbContext();
@@ -28,5 +28,6 @@ public class UnitOfWork : IDisposable
     IResultRepository ResultRepository;
     IUserRepository UserRepository;
 
-    public void Dispose() => GC.SuppressFinalize(true);
+    public void Dispose()
+        => GC.SuppressFinalize(true);
 }
