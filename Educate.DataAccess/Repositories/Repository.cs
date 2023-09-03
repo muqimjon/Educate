@@ -1,8 +1,8 @@
-﻿using Educate.Domain.Commons;
-using Educate.Data.DbContexts;
-using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
+﻿using Educate.Data.Contexts;
 using Educate.DataAccess.IRepositories;
+using Educate.Domain.Commons;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Educate.DataAccess.Repositories;
 
@@ -18,9 +18,7 @@ public class Repository<T> : IRepository<T> where T : Auditable
     }
 
     public async Task CreateAsync(T entity)
-    {
-        await _dbSet.AddAsync(entity);
-    }
+        => await _dbSet.AddAsync(entity);
 
     public void Update(T entity)
     {
@@ -29,14 +27,10 @@ public class Repository<T> : IRepository<T> where T : Auditable
     }
 
     public void Delete(T entity)
-    {
-        entity.IsDeleted = true;
-    }
+        => entity.IsDeleted = true;
 
     public void Destroy(T entity)
-    {
-        _dbSet.Remove(entity);
-    }
+        => _dbSet.Remove(entity);
 
     public async Task<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null!)
     {
@@ -63,7 +57,5 @@ public class Repository<T> : IRepository<T> where T : Auditable
     }
 
     public async Task SaveAsync()
-    {
-        await _appDbContext.SaveChangesAsync();
-    }
+        => await _appDbContext.SaveChangesAsync();
 }
